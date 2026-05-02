@@ -1,6 +1,6 @@
 Feature: Account management
 
-  @AS360-401
+  @AS360TC-133
   Scenario: Update profile information
     Given user is on the account page
     When user updates profile information
