@@ -1,6 +1,6 @@
 Feature: Site navigation
 
-  @AS360-134
+  @AS360TC-134
   Scenario: Go to products page
     Given user is on the home page
     When user navigates to the products page
