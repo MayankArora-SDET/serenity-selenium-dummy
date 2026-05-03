@@ -3,6 +3,7 @@ package com.example.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 public class AccountStepDefinitions {
 
@@ -19,6 +20,7 @@ public class AccountStepDefinitions {
     @Then("profile updates should be applied")
     public void profile_updates_should_be_applied() {
         System.out.println("STEP: Confirm updated profile information+++++++++");
+        Assert.fail("Profile update failed");
     }
 
     @When("user changes the password")
