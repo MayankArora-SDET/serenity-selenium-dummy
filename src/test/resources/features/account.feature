@@ -6,7 +6,7 @@ Feature: Account management
     When user updates profile information
     Then profile updates should be applied
 
-  @AS360TC-1
+  @AS360TC-2
   Scenario: Change password
     Given user is on the account page
     When user updates profile information
