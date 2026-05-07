@@ -9,6 +9,9 @@ Feature: Account management
   @AS360TC-1
   Scenario: Change password
     Given user is on the account page
+    When user updates profile information
+    Then profile updates should be applied
+    Given user is on the account page
     When user changes the password
     Then password change should be successful
 
