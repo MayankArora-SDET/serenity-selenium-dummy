@@ -1,6 +1,6 @@
 Feature: Account management
 
-  @AS360TC-70
+  @SIMPLETC-3
   Scenario: Update profile information
     Given user is on the account page
     When user updates profile information
