@@ -1,14 +1,16 @@
 package com.example.runner;
 
-import net.serenitybdd.cucumber.CucumberWithSerenity;
+import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
-@RunWith(CucumberWithSerenity.class)
+@RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com.example.steps",
-        plugin = {"pretty"}
+        plugin = {
+                "pretty"
+        }
 )
 public class CucumberTestSuite {
 }

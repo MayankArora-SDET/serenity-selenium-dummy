@@ -1,19 +1,16 @@
 Feature: Account management
 
   @SIMPLETC-3
-  Scenario: Update profile information
-    Given user is on the account page
-    When user updates profile information
-    Then profile updates should be applied
+  Scenario: Just login into the application
+    Given user is on the login page
+    When user enters valid credentials
+    Then user should see the dashboard
 
   @AS360TC-2
-  Scenario: Change password
-    Given user is on the account page
-    When user updates profile information
-    Then profile updates should be applied
-    Given user is on the account page
-    When user changes the password
-    Then password change should be successful
+  Scenario: Login fails with valid password
+    Given user is on the login page
+    When user enters invalid password
+    Then user should see the dashboard
 
   @AS360-403
   Scenario: View order history

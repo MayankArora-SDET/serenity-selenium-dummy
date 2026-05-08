@@ -1,58 +1,76 @@
 package com.example.steps;
 
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginStepDefinitions {
 
+    private WebDriver driver;
+
     @Given("user is on the login page")
     public void user_is_on_the_login_page() {
-        System.out.println("STEP: Open login page+++++++++++");
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
+        System.out.println("STEP: Open OrangeHRM login page");
     }
 
     @When("user enters valid credentials")
     public void user_enters_valid_credentials() {
-        System.out.println("STEP: Enter valid username and password+++++++++++");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
+        driver.findElement(By.name("username")).sendKeys("Admin");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+        driver.findElement(By.name("password")).sendKeys("admin123");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        System.out.println("STEP: Enter valid credentials and submit");
     }
 
     @Then("user should see the dashboard")
     public void user_should_see_the_dashboard() {
-        System.out.println("STEP: Verify dashboard is visible+++++++++++");
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.urlContains("/dashboard"));
+        Assert.assertTrue(driver.getCurrentUrl().contains("/dashboard"));
+        System.out.println("STEP: Verify dashboard is visible");
     }
 
     @When("user enters invalid password")
     public void user_enters_invalid_password() {
-        System.out.println("STEP: Enter incorrect password+++++++++++");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
+        driver.findElement(By.name("username")).sendKeys("Admin");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+        driver.findElement(By.name("password")).sendKeys("wrongPassword");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        System.out.println("STEP: Enter invalid password and submit");
     }
 
     @Then("user should see an error message")
     public void user_should_see_an_error_message() {
-        System.out.println("STEP: Verify error message displayed+++++++++++");
+        new WebDriverWait(driver, Duration.ofSeconds(15))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".oxd-alert-content-text")));
+        Assert.assertTrue(driver.findElement(By.cssSelector(".oxd-alert-content-text")).isDisplayed());
+        System.out.println("STEP: Verify invalid login error message is visible");
     }
 
-    @When("username is missing")
-    public void username_is_missing() {
-        System.out.println("STEP: Submit login without username+++++++++++");
-    }
-
-    @Then("user should see a username required message")
-    public void user_should_see_a_username_required_message() {
-        System.out.println("STEP: Verify username required message+++++++++++");
-    }
-
-    @Given("user is logged in")
-    public void user_is_logged_in() {
-        System.out.println("STEP: Simulate user already logged in+++++++++++");
-    }
-
-    @When("user clicks logout")
-    public void user_clicks_logout() {
-        System.out.println("STEP: Click logout button+++++++++++");
-    }
-
-    @Then("user should return to login page")
-    public void user_should_return_to_login_page() {
-        System.out.println("STEP: Verify login page is shown again+++++++++++");
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
