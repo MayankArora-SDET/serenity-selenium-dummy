@@ -1,12 +1,12 @@
 Feature: Account management
 
-  @SIMPLETC-3
+  @AS360TC-3
   Scenario: Just login into the application
     Given user is on the login page
     When user enters valid credentials
     Then user should see the dashboard
 
-  @AS360TC-2
+  @AS360TC-4
   Scenario: Login fails with valid password
     Given user is on the login page
     When user enters invalid password
