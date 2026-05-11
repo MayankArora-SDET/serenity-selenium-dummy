@@ -1,60 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>serenity-selenium-dummy</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>E2Eframework</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-
-        <serenity.version>3.9.8</serenity.version>
-        <cucumber.version>7.14.0</cucumber.version>
-
-        <!-- Default Report Folder -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <report.path>cucumber-reports</report.path>
 
     </properties>
 
     <dependencies>
 
-        <!-- Cucumber -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.12.1</version>
+            <version>4.43.0</version>
         </dependency>
 
-        <!-- WebDriverManager -->
+        <!-- Cucumber -->
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.8.0</version>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.34.3</version>
         </dependency>
 
-        <!-- JUnit -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.34.3</version>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.12.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.11.0</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -63,8 +60,7 @@
         </dependency>
 
     </dependencies>
-
-    <build>
+ <build>
 
         <plugins>
 
@@ -88,6 +84,7 @@
 
                 <configuration>
                     <includes>
+                        <include>**/*TestRunner.java</include>
                         <include>**/*TestSuite.java</include>
                     </includes>
                     <systemPropertyVariables>
@@ -99,5 +96,4 @@
         </plugins>
 
     </build>
-
 </project>
